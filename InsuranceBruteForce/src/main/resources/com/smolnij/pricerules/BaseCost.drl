@@ -1,0 +1,17 @@
+//created on: 27.07.2013
+package pricerules
+
+//list any import classes here.
+
+import com.smolnij.domain.Client
+
+//declare any global variables here
+
+rule "Base cost"
+
+    when
+        $a:Client(  )
+    then
+        $a.setInsurancePrice(new java.math.BigDecimal(1000));
+
+end

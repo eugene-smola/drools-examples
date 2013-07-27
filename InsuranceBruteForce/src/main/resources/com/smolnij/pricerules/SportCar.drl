@@ -1,0 +1,26 @@
+//created on: 27.07.2013
+package pricerules
+
+//list any import classes here.
+import com.smolnij.domain.Client
+import java.math.BigDecimal
+
+
+//declare any global variables here
+
+rule "Sportcar fee"
+
+    when
+        $a : Client( sportCar == true )
+        
+    then
+        $a.setInsurancePrice( $a.getInsurancePrice().add($a.getInsurancePrice().multiply(new BigDecimal(0.31))));
+end
+
+rule "Sportcar porshe fee"
+    //include attributes such as "salience" here...
+    when
+    	$a : Client( carMake == "PORSCHE" && sportCar == true)
+    then
+        $a.setInsurancePrice(  $a.getInsurancePrice().add($a.getInsurancePrice().multiply(new BigDecimal(0.18))) );
+end
