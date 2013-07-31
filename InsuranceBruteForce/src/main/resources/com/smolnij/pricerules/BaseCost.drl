@@ -8,7 +8,7 @@ import com.smolnij.domain.Client
 //declare any global variables here
 
 rule "Base cost"
-
+salience 100
     when
         $a:Client(  )
     then

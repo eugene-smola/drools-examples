@@ -6,6 +6,7 @@ import static com.smolnij.util.PrintUtils.getNicePriceQuietly;
 
 import com.smolnij.calculator.InsuranceCalculator;
 import com.smolnij.calculator.InsuranceCalculatorDrools;
+import com.smolnij.domain.CarColor;
 import com.smolnij.domain.Client;
 
 /**
@@ -17,7 +18,7 @@ public class MainDrools {
 
 		Client trustworthyClient = createTrustworthyClient();
 		Client unreliableClient = createUnreliableClient();
-		unreliableClient.setCarMake("PORSCHE");
+		trustworthyClient.setCarColor(CarColor.RED);
 		InsuranceCalculator calcDrools = new InsuranceCalculatorDrools();
 
 		System.out.println("[Drools] Trustworthy client insurance price: "

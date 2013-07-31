@@ -75,4 +75,7 @@ public class Client {
 	public void setInsurancePrice(BigDecimal insurancePrice) {
 		this.insurancePrice = insurancePrice;
 	}
+	public boolean isNewCar() {
+		return this.getCarAge() == 0;
+	}
 }

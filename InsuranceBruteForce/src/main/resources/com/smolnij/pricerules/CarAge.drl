@@ -1,0 +1,12 @@
+//created on: 31.07.2013
+package pricerules
+
+import com.smolnij.domain.Client
+
+rule "New car"
+    when
+        //conditions
+    then
+        //actions
+
+end

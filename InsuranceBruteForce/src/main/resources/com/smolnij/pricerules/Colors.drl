@@ -1,0 +1,21 @@
+//created on: 31.07.2013
+package pricerules
+
+import com.smolnij.domain.Client
+import com.smolnij.domain.CarColor
+
+rule "Safest Colours"
+
+    when
+    $c : Client( carColor == CarColor.RED || carColor == CarColor.YELLOW)
+    then
+	$c.setInsurancePrice($c.getInsurancePrice().subtract($c.getInsurancePrice().multiply(new BigDecimal(0.11))));
+end
+
+rule "Safe Colours"
+
+    when
+    $c : Client( carColor == CarColor.BLUE)
+    then
+	$c.setInsurancePrice($c.getInsurancePrice().subtract($c.getInsurancePrice().multiply(new BigDecimal(0.7))));
+end

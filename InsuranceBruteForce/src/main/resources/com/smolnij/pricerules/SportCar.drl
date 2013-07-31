@@ -1,12 +1,8 @@
 //created on: 27.07.2013
 package pricerules
 
-//list any import classes here.
 import com.smolnij.domain.Client
 import java.math.BigDecimal
-
-
-//declare any global variables here
 
 rule "Sportcar fee"
 
@@ -18,7 +14,6 @@ rule "Sportcar fee"
 end
 
 rule "Sportcar porshe fee"
-    //include attributes such as "salience" here...
     when
     	$a : Client( carMake == "PORSCHE" && sportCar == true)
     then

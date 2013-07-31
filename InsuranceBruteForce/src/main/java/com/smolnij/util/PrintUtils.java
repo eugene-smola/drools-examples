@@ -11,7 +11,7 @@ public class PrintUtils {
 	
 	public static BigDecimal getNicePriceQuietly(Client client, InsuranceCalculator calculator) {
 		try {
-			client.setInsurancePrice(calculator.calcInsurancePrice(client));
+			calculator.calcInsurancePrice(client);
 		} catch (UnsupportedProductException e) {
 			System.out.println("Sorry, no current products because ".concat(e.getMessage()));
 			return BigDecimal.ZERO;
