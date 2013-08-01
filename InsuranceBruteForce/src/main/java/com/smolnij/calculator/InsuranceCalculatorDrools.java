@@ -1,59 +1,26 @@
 package com.smolnij.calculator;
 
-import org.drools.KnowledgeBase;
-import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.KnowledgeBuilder;
-import org.drools.builder.KnowledgeBuilderFactory;
-import org.drools.builder.ResourceType;
-import org.drools.io.ResourceFactory;
+import java.util.List;
+
 import org.drools.runtime.StatelessKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.smolnij.domain.Client;
-import com.smolnij.exception.UnsupportedProductException;
+import com.smolnij.drools.KnowledgeSessionBuilder;
 
 public class InsuranceCalculatorDrools implements InsuranceCalculator {
-	
 	private Logger LOG = LoggerFactory.getLogger(getClass());
+	StatelessKnowledgeSession ksession = new KnowledgeSessionBuilder().populateStatelessKnowledgeSession();
 
+	public InsuranceCalculatorDrools() {
+		ksession = new KnowledgeSessionBuilder().populateStatelessKnowledgeSession();
+		LOG.info("Knowledge session populated");
+	}
+	//TODO Make example for list of clients
+	//TODO Make validation rule
 	@Override
-	public void calcInsurancePrice(Client c) throws UnsupportedProductException {
-
-		KnowledgeBuilder kbuilder = initKnowledgeBuilder();
-		KnowledgeBase kbase = populateKnowledgeBase(kbuilder);
-		StatelessKnowledgeSession ksession = kbase.newStatelessKnowledgeSession();
-
-		ksession.execute(c);
-	}
-
-	private KnowledgeBase populateKnowledgeBase(KnowledgeBuilder kbuilder) {
-		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-		return kbase;
-	}
-
-	private KnowledgeBuilder initKnowledgeBuilder() {
-		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		
-		addRule(kbuilder, "com/smolnij/pricerules/BaseCost.drl");
-		addRule(kbuilder, "com/smolnij/pricerules/SportCar.drl");
-		addRule(kbuilder, "com/smolnij/pricerules/Bargains.drl");
-		addRule(kbuilder, "com/smolnij/pricerules/Colors.drl");
-
-		validateKnowledgeBase(kbuilder);
-		return kbuilder;
-	}
-
-	private void addRule(KnowledgeBuilder kbuilder, String path) {
-		kbuilder.add(ResourceFactory.newClassPathResource(path, getClass()),
-				ResourceType.DRL);
-		validateKnowledgeBase(kbuilder);
-	}
-
-	private void validateKnowledgeBase(KnowledgeBuilder kbuilder) {
-		if ( kbuilder.hasErrors() ) {
-			LOG.error( kbuilder.getErrors().toString() );
-		}
+	public void calcInsurancePrice(List<Client> clients) {
+		ksession.execute(clients);
 	}
 }

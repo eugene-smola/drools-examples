@@ -3,19 +3,33 @@ package com.smolnij.calculator;
 import static com.smolnij.domain.CarColor.BLUE;
 import static com.smolnij.domain.CarColor.RED;
 import static com.smolnij.domain.CarColor.YELLOW;
-import static com.smolnij.util.MathUtils.addPercent;
-import static com.smolnij.util.MathUtils.isBetweenInclusive;
-import static com.smolnij.util.MathUtils.subtractPercent;
+import static com.smolnij.hc.util.MathUtils.addPercent;
+import static com.smolnij.hc.util.MathUtils.isBetweenInclusive;
+import static com.smolnij.hc.util.MathUtils.subtractPercent;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.smolnij.domain.CarColor;
 import com.smolnij.domain.Client;
 import com.smolnij.exception.UnsupportedProductException;
 
 public class InsuranceCalculatorHardcode implements InsuranceCalculator {
-
-	public void calcInsurancePrice(Client c) throws UnsupportedProductException {
+	private Logger LOG = LoggerFactory.getLogger(getClass());
+	public void calcInsurancePrice(List<Client> clients) {
+		for (Client c : clients) {
+			try {
+				calcInsurancePrice(c);
+			} catch (UnsupportedProductException e) {
+				LOG.error("Was not able to calculate insurance price for {}. Reason: {}", c.getName(), e.getMessage());
+				c.setInsurancePrice(ERROR_PRICE);
+			}
+		}
+	}
+	private void calcInsurancePrice(Client c) throws UnsupportedProductException {
 		BigDecimal price = BASE_COST;
 		int carAge = c.getCarAge();
 		String carMake = c.getCarMake();
@@ -52,7 +66,7 @@ public class InsuranceCalculatorHardcode implements InsuranceCalculator {
 		} else {
 			if (carAge > MAX_CAR_AGE) {
 				throw new UnsupportedProductException("No offer for car older than "
-						+ MAX_CAR_AGE + "years");
+						+ MAX_CAR_AGE + " years");
 			}
 		}
 		if (isBetweenInclusive(0, THRUSTWORTHY_AGE-1, clientAge )) {

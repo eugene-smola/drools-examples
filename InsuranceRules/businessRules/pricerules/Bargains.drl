@@ -2,6 +2,7 @@
 package pricerules
 
 import com.smolnij.domain.Client
+import java.math.BigDecimal
 
 rule "New Toyota bargain"
 

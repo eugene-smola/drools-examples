@@ -2,7 +2,10 @@ package com.smolnij.main;
 
 import static com.smolnij.util.ClientFactory.createTrustworthyClient;
 import static com.smolnij.util.ClientFactory.createUnreliableClient;
-import static com.smolnij.util.PrintUtils.getNicePriceQuietly;
+import static com.smolnij.util.PrintUtils.printResults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.smolnij.calculator.InsuranceCalculator;
 import com.smolnij.calculator.InsuranceCalculatorDrools;
@@ -17,21 +20,19 @@ public class MainBoth {
 	public static void main(String[] args) {
 		System.out.println("Please find below your result:");
 
+		List<Client> clients = new ArrayList<Client>(2);
 		Client trustworthyClient = createTrustworthyClient();
 		Client unreliableClient = createUnreliableClient();
-
+		clients.add(trustworthyClient);
+		clients.add(unreliableClient);
 		InsuranceCalculator calcHardcode = new InsuranceCalculatorHardcode();
 		InsuranceCalculator calcDrools = new InsuranceCalculatorDrools();
-
-		System.out.println("[Hardcode] Trustworthy client insurance price: "
-				+ getNicePriceQuietly(trustworthyClient, calcHardcode));
-		System.out.println("[Hardcode] Unreliable client insurance price: "
-				+ getNicePriceQuietly(unreliableClient, calcHardcode));
 		
 		
-		System.out.println("[Drools] Trustworthy client insurance price: "
-				+ getNicePriceQuietly(trustworthyClient, calcDrools));
-		System.out.println("[Drools] Unreliable client insurance price: "
-				+ getNicePriceQuietly(unreliableClient, calcDrools));
+		calcHardcode.calcInsurancePrice(clients);
+		printResults(clients, calcHardcode.getClass());
+		
+		calcDrools.calcInsurancePrice(clients);
+		printResults(clients, calcDrools.getClass());
 	}
 }

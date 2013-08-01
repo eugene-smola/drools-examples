@@ -6,7 +6,7 @@ import com.smolnij.domain.Client;
 public class ClientFactory {
 	
 	public static Client createTrustworthyClient() {
-		Client client = new Client();
+		Client client = new Client("Trustwothy client");
 		client.setCarAge(1);
 		client.setCarColor(CarColor.YELLOW);
 		client.setCarMake("TOYOTA");
@@ -18,7 +18,7 @@ public class ClientFactory {
 	}
 	
 	public static Client createUnreliableClient() {
-		Client client = new Client();
+		Client client = new Client("Unreliable client");
 		client.setCarAge(0);
 		client.setCarColor(CarColor.BLACK);
 		client.setCarMake("FORD");

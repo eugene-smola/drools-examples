@@ -1,4 +1,4 @@
-package com.smolnij.util;
+package com.smolnij.hc.util;
 
 import java.math.BigDecimal;
 
