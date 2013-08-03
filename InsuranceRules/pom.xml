@@ -40,6 +40,12 @@
 			<version>1.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.smolnij</groupId>
+			<artifactId>00_Insurance</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- Drools -->
 		<dependency>
 			<groupId>org.drools</groupId>

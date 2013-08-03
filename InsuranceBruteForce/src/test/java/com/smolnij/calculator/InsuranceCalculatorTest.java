@@ -5,8 +5,8 @@ import static com.smolnij.calculator.InsuranceCalculator.ERROR_PRICE;
 import static com.smolnij.calculator.InsuranceCalculator.MAX_CAR_AGE;
 import static com.smolnij.calculator.InsuranceCalculator.THRUSTWORTHY_AGE;
 import static com.smolnij.calculator.InsuranceCalculator.VERY_ELDERLY_AGE;
-import static com.smolnij.hc.util.MathUtils.addPercent;
-import static com.smolnij.hc.util.MathUtils.subtractPercent;
+import static com.smolnij.util.MathUtils.addPercent;
+import static com.smolnij.util.MathUtils.subtractPercent;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -29,8 +29,9 @@ import com.smolnij.exception.UnsupportedProductException;
 public class InsuranceCalculatorTest {
 
 	public static @DataPoints
-	InsuranceCalculator[] candidates = { new InsuranceCalculatorHardcode() };
-//	, new InsuranceCalculatorDrools() };
+	InsuranceCalculator[] candidates = { new InsuranceCalculatorHardcode() 
+//	};
+	, new InsuranceCalculatorDrools() };
 	private Client eligibleClient;
 	private Client nonEligibleClient;
 	private List<Client> clients;
@@ -142,7 +143,7 @@ public class InsuranceCalculatorTest {
 	}
 	
 	@Theory
-	public void clienAge (InsuranceCalculator calc) throws Exception {
+	public void clientAge (InsuranceCalculator calc) throws Exception {
 		
 		int clientAge = 15;
 		BigDecimal fee = addToBaseCost(12);

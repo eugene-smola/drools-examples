@@ -3,9 +3,9 @@ package com.smolnij.calculator;
 import static com.smolnij.domain.CarColor.BLUE;
 import static com.smolnij.domain.CarColor.RED;
 import static com.smolnij.domain.CarColor.YELLOW;
-import static com.smolnij.hc.util.MathUtils.addPercent;
-import static com.smolnij.hc.util.MathUtils.isBetweenInclusive;
-import static com.smolnij.hc.util.MathUtils.subtractPercent;
+import static com.smolnij.util.MathUtils.addPercent;
+import static com.smolnij.util.MathUtils.isBetweenInclusive;
+import static com.smolnij.util.MathUtils.subtractPercent;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,0 +1,135 @@
+//created on: 27.07.2013
+package pricerules
+
+import java.math.BigDecimal
+import com.smolnij.domain.Client
+import com.smolnij.util.MathUtils
+import com.smolnij.domain.CarColor
+import com.smolnij.calculator.InsuranceCalculator
+
+// these two shows static import
+//of function
+import function com.smolnij.util.MathUtils.addPercent
+//of all functions
+import function java.lang.Math.*;
+
+declare AgesFees
+   young : int
+   elderly : int
+end
+
+// these functions are written from scratch in rules lang
+function BigDecimal subtractPercent(BigDecimal price, double amount) {
+    return price.subtract(getPercentageValue(price, amount));
+}
+
+function BigDecimal getPercentageValue(BigDecimal price, double amount) {
+		return price.multiply(new BigDecimal(amount / 100));
+}
+
+//THE AddPercent is imported, while subtractPercent is defined here
+
+/*  ****** ***********
+* Rules
+* are 
+* begins here.
+*/
+
+rule initialize
+    salience 100000
+    when
+        // always
+    then
+    AgesFees agesFees = new AgesFees( 12, 9 );
+    insert( agesFees );
+end
+
+
+rule "Sportcar fee"
+
+    when
+        $c : Client( sportCar == true )
+        
+    then
+        $c.setInsurancePrice( addPercent($c.getInsurancePrice(), 31));
+        
+end
+
+rule "Sportcar porshe fee"
+    when
+    	$c : Client( carMake == "PORSCHE" && sportCar == true)
+    then
+        $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 18));
+end
+
+rule "New Toyota bargain"
+    when
+    //same  as
+//    $c: Client( eval( "TOYOTA".equalsIgnoreCase( carMake )) && $c.isNewCar() )
+    $c: Client( eval( "TOYOTA".equalsIgnoreCase( carMake )) && newCar )
+    then
+        $c.setInsurancePrice(subtractPercent($c.getInsurancePrice(), 5));
+end
+
+rule "Safest Colours"
+
+    when
+    $c : Client( carColor == CarColor.RED || carColor == CarColor.YELLOW)
+    then
+	$c.setInsurancePrice(subtractPercent($c.getInsurancePrice(), 11));
+end
+
+rule "Safe Colours"
+
+    when
+    $c : Client( carColor == CarColor.BLUE)
+    then
+	$c.setInsurancePrice($c.getInsurancePrice().subtract($c.getInsurancePrice().multiply(new BigDecimal(0.7))));
+end
+
+rule "New car"
+    when										//example of class casts
+       $c : Client (MathUtils.isBetweenInclusive((int)0, (int)1, carAge))
+    then
+         $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 3));
+end
+
+rule "Mid car"
+    when
+       $c : Client (MathUtils.isBetweenInclusive(2, 3, carAge))
+    then
+         $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 1));
+end
+
+rule "Old car"
+    when
+       $c : Client (MathUtils.isBetweenInclusive(4, 5, carAge))
+    then
+         $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 5));
+end
+
+rule "Oldest car"
+    when
+       $c : Client ( carAge > InsuranceCalculator.MAX_CAR_AGE)
+    then
+         //exception should be thrown here
+end
+
+rule "Too young"
+    when
+       $c : Client (MathUtils.isBetweenInclusive(0, 20, clientAge))
+    then
+         $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 12));
+end
+rule "Mid-age"
+    when
+       $c : Client (MathUtils.isBetweenInclusive(20, 69, clientAge))
+    then
+         $c.setInsurancePrice(subtractPercent($c.getInsurancePrice(), 15));
+end
+rule "Elderly"
+    when
+       $c : Client (clientAge > 70)
+    then
+         $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 9));
+end

@@ -1,10 +1,10 @@
 package com.smonij.util;
 
-import static com.smolnij.hc.util.MathUtils.addPercent;
-import static com.smolnij.hc.util.MathUtils.isBetweenInclusive;
-import static com.smolnij.hc.util.MathUtils.subtractPercent;
 import static com.smolnij.test.TestUtils.PRECISION;
 import static com.smolnij.test.TestUtils.doubleVal;
+import static com.smolnij.util.MathUtils.addPercent;
+import static com.smolnij.util.MathUtils.isBetweenInclusive;
+import static com.smolnij.util.MathUtils.subtractPercent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -30,11 +30,11 @@ public class MathUtilsTest {
 
 	@Test
 	public void isBetweenTest() {
-		assertTrue(isBetweenInclusive(0, 1, 0.001));
+		
 		assertTrue(isBetweenInclusive(0, 1, 1));
 		assertTrue(isBetweenInclusive(0, 1, 0));
 		
-		assertFalse(isBetweenInclusive(0, 1, 1.1));
+		assertFalse(isBetweenInclusive(0, 1, 2));
 		assertFalse(isBetweenInclusive(0, 1, -1));
 	}
 }
