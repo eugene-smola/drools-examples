@@ -57,7 +57,7 @@ end
 
 rule "Sportcar porshe fee"
     when
-    	$c : Client( carMake == "PORSCHE" && sportCar == true)
+    	$c : Client( "PORSCHE".equalsIgnoreCase( carMake ) && sportCar)
     then
         $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 18));
 end
@@ -84,7 +84,7 @@ rule "Safe Colours"
     when
     $c : Client( carColor == CarColor.BLUE)
     then
-	$c.setInsurancePrice($c.getInsurancePrice().subtract($c.getInsurancePrice().multiply(new BigDecimal(0.7))));
+	$c.setInsurancePrice(subtractPercent($c.getInsurancePrice(), 7));
 end
 
 rule "New car"
@@ -103,7 +103,7 @@ end
 
 rule "Old car"
     when
-       $c : Client (MathUtils.isBetweenInclusive(4, 5, carAge))
+       $c : Client (MathUtils.isBetweenInclusive(4, 10, carAge))
     then
          $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 5));
 end
@@ -129,7 +129,14 @@ rule "Mid-age"
 end
 rule "Elderly"
     when
-       $c : Client (clientAge > 70)
+       $c : Client (clientAge >= 70)
     then
          $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 9));
+end
+
+rule "Driver experience"
+    when
+       $c : Client (driverExperience > 3)
+    then
+         $c.setInsurancePrice(subtractPercent($c.getInsurancePrice(), 20));
 end
