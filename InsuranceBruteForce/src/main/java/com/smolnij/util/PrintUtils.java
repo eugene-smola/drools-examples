@@ -15,4 +15,10 @@ public class PrintUtils {
 					+ client.getInsurancePrice().setScale(2, RoundingMode.HALF_UP));
 		}
 	}
+	public static void printRules(List<String> rules, Class<?> clazz) {
+		System.out.println("[" + clazz.getName() + "] applied rules: ");
+		for (String rule : rules) {
+			System.out.println(rule);
+		}
+	}
 }

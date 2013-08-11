@@ -124,7 +124,7 @@ rule "Too young"
 end
 rule "Mid-age"
     when
-       $c : Client (MathUtils.isBetweenInclusive(20, 69, clientAge))
+       $c : Client (MathUtils.isBetweenInclusive(21, 69, clientAge))
     then
          $c.setInsurancePrice(subtractPercent($c.getInsurancePrice(), 15));
 end

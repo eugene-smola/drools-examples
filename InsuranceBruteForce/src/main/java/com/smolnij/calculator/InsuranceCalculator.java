@@ -12,4 +12,5 @@ public interface InsuranceCalculator {
 	int VERY_ELDERLY_AGE = 70;
 	BigDecimal ERROR_PRICE = new BigDecimal(-1);
 	void calcInsurancePrice(List<Client> clients);
+	List<String> getFiredRules();
 }
