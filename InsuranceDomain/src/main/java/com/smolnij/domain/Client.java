@@ -13,7 +13,6 @@ public class Client {
 	private CarColor carColor;
 	private boolean sportCar;
 	private String carMake;
-	private double carPrice;
 	private BigDecimal insurancePrice;
 	
 
@@ -58,12 +57,6 @@ public class Client {
 	}
 	public void setCarMake(String carMake) {
 		this.carMake = carMake;
-	}
-	public double getCarPrice() {
-		return carPrice;
-	}
-	public void setCarPrice(double carPrice) {
-		this.carPrice = carPrice;
 	}
 	public BigDecimal getInsurancePrice() {
 		return insurancePrice;

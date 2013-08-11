@@ -10,7 +10,6 @@ public class ClientFactory {
 		client.setCarAge(1);
 		client.setCarColor(CarColor.YELLOW);
 		client.setCarMake("TOYOTA");
-		client.setCarPrice(25000);
 		client.setClientAge(37);
 		client.setDriverExperience(8);
 		client.setSportCar(false);
@@ -22,7 +21,6 @@ public class ClientFactory {
 		client.setCarAge(0);
 		client.setCarColor(CarColor.BLACK);
 		client.setCarMake("FORD");
-		client.setCarPrice(35000);
 		client.setClientAge(20);
 		client.setDriverExperience(1);
 		client.setSportCar(true);

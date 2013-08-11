@@ -13,6 +13,7 @@ import function com.smolnij.util.MathUtils.addPercent
 //of all functions
 import function java.lang.Math.*;
 
+//Declaration of your own type
 declare AgesFees
    young : int
    elderly : int
@@ -30,9 +31,10 @@ function BigDecimal getPercentageValue(BigDecimal price, double amount) {
 //THE AddPercent is imported, while subtractPercent is defined here
 
 /*  ****** ***********
-* Rules
-* are 
-* begins here.
+ Rules
+ are 
+ begins after that example of
+ multiline comment.
 */
 
 rule initialize
@@ -43,7 +45,6 @@ rule initialize
     AgesFees agesFees = new AgesFees( 12, 9 );
     insert( agesFees );
 end
-
 
 rule "Sportcar fee"
 

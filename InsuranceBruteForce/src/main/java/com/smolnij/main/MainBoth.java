@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.smolnij.calculator.InsuranceCalculator;
-import com.smolnij.calculator.InsuranceCalculatorDrools;
+import com.smolnij.calculator.InsuranceCalculatorDroolsRules;
 import com.smolnij.calculator.InsuranceCalculatorHardcode;
 import com.smolnij.domain.Client;
 
@@ -26,7 +26,7 @@ public class MainBoth {
 		clients.add(trustworthyClient);
 		clients.add(unreliableClient);
 		InsuranceCalculator calcHardcode = new InsuranceCalculatorHardcode();
-		InsuranceCalculator calcDrools = new InsuranceCalculatorDrools();
+		InsuranceCalculator calcDrools = new InsuranceCalculatorDroolsRules();
 		
 		
 		calcHardcode.calcInsurancePrice(clients);
