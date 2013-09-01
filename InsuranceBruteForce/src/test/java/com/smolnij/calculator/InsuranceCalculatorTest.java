@@ -20,8 +20,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
-import com.smolnij.calculator.drools.InsuranceCalculatorDroolsRules;
-import com.smolnij.calculator.drools.InsuranceCalculatorDroolsTables;
+import com.smolnij.calculator.drools.InsuranceCalculatorDroolsPkg;
 import com.smolnij.domain.CarColor;
 import com.smolnij.domain.Client;
 import com.smolnij.exception.UnsupportedProductException;
@@ -32,8 +31,9 @@ public class InsuranceCalculatorTest {
 	public static @DataPoints
 	InsuranceCalculator[] candidates = { 
 	new InsuranceCalculatorHardcode(), 
-	new InsuranceCalculatorDroolsRules(),
-	new InsuranceCalculatorDroolsTables()
+//	new InsuranceCalculatorDroolsRules(),
+//	new InsuranceCalculatorDroolsTables(),
+	new InsuranceCalculatorDroolsPkg()
 	};
 	private Client eligibleClient;
 	private Client nonEligibleClient;

@@ -1,0 +1,29 @@
+//created on: 27.07.2013
+package pricerules
+
+//list any import classes here.
+
+import com.smolnij.domain.Client
+
+//declare any global variables here
+
+//The "expander" keyword is no longer necessary, but there is an example JIC
+expander priceDsls.dsl
+
+rule "Sportcar fee"
+
+    when
+        There is a client
+        - with a sportcar
+    then
+        Increase price by 31 percent
+end
+
+rule "Sportcar porshe fee"
+    when
+    There is a client
+        - with a sportcar
+    	- with a porsche car make
+    then
+        Increase price by 18 percent
+end

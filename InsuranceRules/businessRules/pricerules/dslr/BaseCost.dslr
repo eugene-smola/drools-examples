@@ -7,11 +7,13 @@ import com.smolnij.domain.Client
 
 //declare any global variables here
 
+//The "expander" keyword is no longer necessary, but there is an example JIC
+expander priceDsls.dsl
+
 rule "Base cost"
 salience 100
     when
-        $a:Client(  )
+        There is a client
     then
-        $a.setInsurancePrice(new java.math.BigDecimal(1000));
-
+        Set price to 1000
 end

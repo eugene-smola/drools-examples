@@ -39,6 +39,7 @@ public class InsuranceCalculatorHardcode implements InsuranceCalculator {
 	}
 	private void calcInsurancePrice(Client c) throws UnsupportedProductException {
 		BigDecimal price = BASE_COST;
+		notifyListener("Base Cost");
 		int carAge = c.getCarAge();
 		String carMake = c.getCarMake();
 		CarColor carColor = c.getCarColor();

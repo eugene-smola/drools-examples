@@ -34,11 +34,12 @@ public class MainAll {
 	}
 
 	private static List<InsuranceCalculator> createCalcList() {
-		List<InsuranceCalculator> calcList = new ArrayList<InsuranceCalculator>(3);
+		List<InsuranceCalculator> calcList = new ArrayList<InsuranceCalculator>(4);
 		
 		calcList.add(new InsuranceCalculatorHardcode());
 		calcList.add(new InsuranceCalculatorDroolsRules());
 		calcList.add(new InsuranceCalculatorDroolsTables());
+//		calcList.add(new InsuranceCalculatorDroolsPkg());
 		return calcList;
 	}
 

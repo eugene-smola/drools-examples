@@ -2,11 +2,11 @@ package com.smolnij.calculator.drools;
 
 import org.drools.runtime.StatelessKnowledgeSession;
 
-import com.smolnij.drools.DrlKnowledgeSessionBuilder;
+import com.smolnij.drools.PkgKnowledgeSessionBuilder;
 
-public class InsuranceCalculatorDroolsRules extends AbstractDroolsCalculator {
+public class InsuranceCalculatorDroolsPkg extends AbstractDroolsCalculator {
 	//TODO Make validation rule and interrupt rule flow in case of client is invalidS
 	public StatelessKnowledgeSession createKnowledgeSession() {
-		return new DrlKnowledgeSessionBuilder().populateStatelessKnowledgeSession();
+		return new PkgKnowledgeSessionBuilder().populateStatelessKnowledgeSession();
 	}
 }

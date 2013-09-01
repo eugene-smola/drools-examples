@@ -46,6 +46,7 @@ rule initialize
     insert( agesFees );
 end
 
+/*
 rule "Sportcar fee"
 
     when
@@ -62,7 +63,7 @@ rule "Sportcar porshe fee"
     then
         $c.setInsurancePrice(addPercent($c.getInsurancePrice(), 18));
 end
-
+*/
 rule "New Toyota bargain"
     when
     //same  as

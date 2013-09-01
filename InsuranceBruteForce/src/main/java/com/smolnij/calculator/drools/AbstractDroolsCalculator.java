@@ -26,7 +26,7 @@ public abstract class AbstractDroolsCalculator implements InsuranceCalculator {
 
 	@Override
 	public void calcInsurancePrice(List<Client> clients) {
-		//TODO Make validation rule and interrupt rule low in case of client is invalid
+		//TODO Make validation rule and interrupt rule flow in case of client is invalid
 		ksession.addEventListener(listener);
 		ksession.execute(clients);
 	}
