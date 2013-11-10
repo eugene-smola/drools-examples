@@ -1,0 +1,87 @@
+package zoorules;
+
+import com.smolinj.drools.zoo.domain.SomeAnimal;
+import com.smolinj.drools.zoo.domain.FlyingCellOrder;
+import com.smolinj.drools.zoo.domain.SwimmingCellOrder;
+import com.smolinj.drools.zoo.domain.RunningCellOrder;
+import com.smolinj.drools.zoo.domain.AnimalProperty;
+import com.smolinj.drools.zoo.domain.IsFlying;
+import com.smolinj.drools.zoo.domain.IsSwimming;
+import com.smolinj.drools.zoo.domain.IsRunning;
+
+rule "Run always"
+salience 100
+    when
+        $a : SomeAnimal( )
+        
+    then
+    	System.out.println("The animal got into zoo");
+end
+
+rule "Create Animal Property"
+salience 80
+    when
+        $a : SomeAnimal( signs contains "wings" )
+        
+    then
+    	System.out.println("The animal is a Bird");
+    	//flying, swimming, runnig
+    	insertLogical(new AnimalProperty($a, true, false, false));
+end
+//--------- Identities -----
+rule "Flying Identity"
+salience 60
+    when
+        $ap : AnimalProperty(flying == true)
+    then
+    	System.out.println("FLYING bird");
+    	insertLogical(new IsFlying($ap.getAnimal()));
+end
+
+rule "Running Identity"
+salience 60
+    when
+        $ap : AnimalProperty(running == true)
+    then
+    	System.out.println("RUNNING bird");
+    	insertLogical(new IsRunning($ap.getAnimal()));
+end
+
+rule "Swimming Identity"
+salience 60
+    when
+        $ap : AnimalProperty(swimming == true)
+    then
+    	System.out.println("SWIMMING bird");
+    	insertLogical(new IsSwimming($ap.getAnimal()));
+end
+
+
+//-----------Orders --------------------
+rule "Flying Cell Order"
+salience 40
+    when
+        $a : SomeAnimal()
+        $f: IsFlying(animal ==$a)
+    then
+    	System.out.println("Place order for cell for FLYING bird");
+    	insertLogical(new FlyingCellOrder($a));
+end
+rule "Running Cell Order"
+salience 40
+    when
+        $a : SomeAnimal()
+        $r: IsRunning(animal ==$a)
+    then
+    	System.out.println("Place order for cell for RUNNING bird");
+    	insertLogical(new RunningCellOrder($a));
+end
+rule "Swimming Cell Order"
+salience 40
+    when
+        $a : SomeAnimal()
+        $r: IsSwimming(animal ==$a)
+    then
+    	System.out.println("Place order for cell for SWIMMING bird");
+    	insertLogical(new SwimmingCellOrder($a));
+end

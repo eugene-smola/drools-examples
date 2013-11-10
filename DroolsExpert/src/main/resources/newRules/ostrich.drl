@@ -1,0 +1,14 @@
+import com.smolinj.drools.zoo.domain.SomeAnimal;
+import com.smolinj.drools.zoo.domain.AnimalProperty;
+
+rule "Ostrich not flying"
+salience 60
+no-loop true
+    when
+         $a : SomeAnimal(specie == "ostrich")
+         $ap : AnimalProperty(animal == $a)
+    then
+    	System.out.println("The animal is not Flying");
+    	modify( $ap ) { setFlying(false) };
+    	modify( $ap ) { setRunning(true) };
+end
